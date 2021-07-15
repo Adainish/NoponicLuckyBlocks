@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "NoponicLuckyBlocks",
+    "name": "NoponicLuckyBlocks",
+    "description": "Lucky Blocks Mod",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Adenydd"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
