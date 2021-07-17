@@ -56,7 +56,7 @@ public class LuckyBlockCommand extends CommandBase {
                 stack.setCount(amount);
                 target.addItemStackToInventory(stack);
             } else {
-                ServerUtils.send(sender, name + " &cis not a configured Candy Item!");
+                ServerUtils.send(sender, name + " &cis not a configured Lucky Block!");
             }
         }
 
