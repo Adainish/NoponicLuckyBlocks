@@ -1,5 +1,6 @@
 package gg.oddysian.adenydd.noponicluckyblocks.commands;
 
+import com.pixelmonmod.pixelmon.RandomHelper;
 import gg.oddysian.adenydd.noponicluckyblocks.obj.LuckyBlock;
 import gg.oddysian.adenydd.noponicluckyblocks.utils.ServerUtils;
 import gg.oddysian.adenydd.noponicluckyblocks.commands.permissions.PermissionManager;
@@ -48,16 +49,21 @@ public class LuckyBlockCommand extends CommandBase {
             } else ServerUtils.send(sender, "&c(&4!&c) &eYou lack the permission node to use this!");
         }
         if(arguments.length == 4 && arguments[0].contains("give")) {
-            EntityPlayerMP target = server.getPlayerList().getPlayerByUsername(arguments[1]);
-            name = arguments[3];
-            amount = Integer.parseInt(arguments[2]);
-            if (LuckyBlock.isLuckyBlock(name)) {
-                ItemStack stack = LuckyBlock.getLuckyBlock(name).getItem();
-                stack.setCount(amount);
-                target.addItemStackToInventory(stack);
-            } else {
-                ServerUtils.send(sender, name + " &cis not a configured Lucky Block!");
-            }
+            if (PermissionUtils.canUse(PermissionManager.ADMIN_GIVE, sender)) {
+                EntityPlayerMP target = server.getPlayerList().getPlayerByUsername(arguments[1]);
+                name = arguments[3];
+                if (name.equalsIgnoreCase("random")) {
+                    name = RandomHelper.getRandomElementFromList(LuckyBlock.luckyBlocklist());
+                }
+                amount = Integer.parseInt(arguments[2]);
+                if (LuckyBlock.isLuckyBlock(name)) {
+                    ItemStack stack = LuckyBlock.getLuckyBlock(name).getItem();
+                    stack.setCount(amount);
+                    target.addItemStackToInventory(stack);
+                } else {
+                    ServerUtils.send(sender, name + " &cis not a configured Lucky Block!");
+                }
+            } else ServerUtils.send(sender, "&c(&4!&c) &eYou lack the permission node to use this!");
         }
 
     }
